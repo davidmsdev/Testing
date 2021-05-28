@@ -1,0 +1,14 @@
+{
+  "name": "automatizacion",
+  "version": "1.0.0",
+  "description": "Primero pasos con Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Morales",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^7.4.0"
+  }
+}
