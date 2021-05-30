@@ -4,10 +4,12 @@
 describe('Primer conjunto de casos de prueba', () => {
 
     // Caso 1
-    it('Visitar pagina principal de Automation Practice', () => {
+    it('Contar la cantidad de elementos en la sección "Popular" de la home', () => {
 
         cy.visit('http://automationpractice.com/index.php');
-        cy.get('.login').click();
+
+        // Verificamos la cantidad de elementos visibles son 7
+        cy.get('#homefeatured .product-container').should('have.length', 7);
     });
 
     // Caso 2
