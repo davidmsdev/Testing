@@ -8,8 +8,11 @@ describe('Primer conjunto de casos de prueba', () => {
 
         cy.visit('http://automationpractice.com/index.php');
 
-        // Verificamos la cantidad de elementos visibles son 7
-        cy.get('#homefeatured .product-container').should('have.length', 7);
+        // Obtener elemento #homefeatured .product-container como un parámetro
+        cy.get('#homefeatured .product-container').as('PopularProducts');
+
+        // Verificamos que hayan 7 elementos en la lista de populares usando nuestro parámetro
+        cy.get('@PopularProducts').should('have.length', 7);
     });
 
     // Caso 2
