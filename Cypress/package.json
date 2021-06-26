@@ -9,6 +9,6 @@
   "author": "David Morales",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^7.4.0"
+    "cypress": "^7.6.0"
   }
 }
