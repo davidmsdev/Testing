@@ -1,0 +1,21 @@
+{
+    "name": "David",
+    "surname": "M",
+    "email": "correo@correo.com",
+    "gender": "Male",
+    "mobile": "123456789",
+    "birth": [
+        "December", 
+        "1990", 
+        "31"
+    ],
+    "subject": "English",
+    "hobbies": [
+        "Sports", 
+        "Music"
+    ],
+    "image": "my-image.png",
+    "address": "My address",
+    "state": "NCR",
+    "city": "Delhi"
+}
