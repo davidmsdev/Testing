@@ -25,6 +25,9 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
         let email = this.data.email
         let gender = this.data.gender
         let phone = this.data.mobile
+        let month = this.data.birth.month
+        let year = this.data.birth.year
+        let day = this.data.birth.day
 
         cy.get('#firstName')
             .type(name)
@@ -42,6 +45,29 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
 
         cy.get('#userNumber')
             .type(phone)
+
+        cy.get('#dateOfBirthInput')
+            // Abrimos el calendario
+            .click()
+
+        // Selecionamos los datos de la fecha de nacimineto
+        cy.get('.react-datepicker__month-select')
+            .should('be.visible')
+            .select(month)
+
+        cy.get('.react-datepicker__year-select')
+            .should('be.visible')
+            .select(year)
+
+        cy.get('.react-datepicker__day--0' + day)
+            .should('be.visible')
+            .click()
+
+        // Verificamos que el value del elemento coincide con los datos enviados
+        cy.get('#dateOfBirthInput')
+            .should('contain.value', month.substring(0,3))
+            .should('contain.value', year)
+            .should('contain.value', day)     
     })
     
 })
