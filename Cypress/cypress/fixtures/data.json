@@ -4,11 +4,11 @@
     "email": "correo@correo.com",
     "gender": "Male",
     "mobile": "123456789",
-    "birth": [
-        "December", 
-        "1990", 
-        "31"
-    ],
+    "birth": {
+        "month": "December", 
+        "year": "1990", 
+        "day": "31"
+    },
     "subject": "English",
     "hobbies": [
         "Sports", 
