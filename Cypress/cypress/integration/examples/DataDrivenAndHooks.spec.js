@@ -28,6 +28,7 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
         let month = this.data.birth.month
         let year = this.data.birth.year
         let day = this.data.birth.day
+        let subject = this.data.subject
 
         cy.get('#firstName')
             .type(name)
@@ -65,9 +66,23 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
 
         // Verificamos que el value del elemento coincide con los datos enviados
         cy.get('#dateOfBirthInput')
-            .should('contain.value', month.substring(0,3))
+            .should('contain.value', month.substring(0,3)) // Comparamos con las 3 primeras letras
             .should('contain.value', year)
-            .should('contain.value', day)     
+            .should('contain.value', day)  
+            
+        // Seleccionamos la materia que queremos escoger para posteriormente darle click
+        cy.get('.subjects-auto-complete__value-container')
+            .type(subject)
+
+        // Buscamos un id que contenga react-select para darle click
+        cy.get('div[id^="react-select-"]')
+            .click()
+
+        // Comprobamos que se ha agregado correctamente
+        cy.get('.subjects-auto-complete__multi-value')
+            .should('contain.text', subject)
+
+        
     })
     
 })
