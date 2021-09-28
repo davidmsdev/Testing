@@ -14,4 +14,8 @@ repositories {
 dependencies {
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-java
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '6.10.4'
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-java
+    implementation 'io.cucumber:cucumber-java:6.10.4'
 }
