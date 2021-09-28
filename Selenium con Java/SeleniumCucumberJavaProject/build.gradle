@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+}
+
+group 'CursoJavaUdemy'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 13
+
+repositories {
+    mavenCentral() // Repositorio de dónde nos bajaremos todas las dependencias
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+}
