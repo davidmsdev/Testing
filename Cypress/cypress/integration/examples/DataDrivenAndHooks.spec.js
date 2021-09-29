@@ -91,7 +91,11 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
             .should('contain.text', subject)
 
         // Seleecionando los hobbies, en este caso el primero del array
-        cy.get('div[class="custom-control custom-checkbox custom-control-inline"]:has(label:contains("'+hobbies[0]+'")) input')
+        cy.get('div[class="custom-control custom-checkbox custom-control-inline"]:has(label:contains("'+ hobbies[0] +'")) input')
+            .check({force:true})
+            .should("be.checked")
+
+        cy.get('div[class="custom-control custom-checkbox custom-control-inline"]:has(label:contains("'+ hobbies[1] +'")) input')
             .check({force:true})
             .should("be.checked")
 
@@ -135,6 +139,41 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
         // Submiteamos el form
         cy.get('#submit')
             .click()
+
+        // Una vez rellenado todo el formulario aparece una pantalla resumen, vamos a comprobar que los datos son correctos
+        cy.get('#example-modal-sizes-title-lg')
+            .should('have.text', 'Thanks for submitting the form')
+
+        // Encontramos el label y su td, una vez hecho esto queremos el hermano de este td que contiene nuestros datos
+        cy.get('td:contains(Student Name) + td')
+            .should('have.text', name + " " + surname)
+
+        cy.get('td:contains(Student Email) + td')
+            .should('have.text', email)
+
+        cy.get('td:contains(Gender) + td')
+            .should('have.text', gender)
+
+        cy.get('td:contains(Mobile) + td')
+            .should('have.text', phone)
+
+        cy.get('td:contains(Date of Birth) + td')
+            .should('have.text', day + " " + month + "," + year)
+
+        cy.get('td:contains(Subjects) + td')
+            .should('have.text', subject)
+
+        cy.get('td:contains(Hobbies) + td')
+            .should('have.text', hobbies[0] + ", " + hobbies[1])
+
+        cy.get('td:contains(Picture) + td')
+            .should('have.text', image)
+
+        cy.get('td:contains(Address) + td')
+            .should('have.text', address)
+
+        cy.get('td:contains(State and City) + td')
+            .should('have.text', state + " " + city) 
     })
     
 })
