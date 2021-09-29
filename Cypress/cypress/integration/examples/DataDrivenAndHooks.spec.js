@@ -29,6 +29,7 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
         let year = this.data.birth.year
         let day = this.data.birth.day
         let subject = this.data.subject
+        let hobbies = this.data.hobbies
 
         cy.get('#firstName')
             .type(name)
@@ -82,7 +83,10 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
         cy.get('.subjects-auto-complete__multi-value')
             .should('contain.text', subject)
 
-        
+        // Seleecionando los hobbies, en este caso el primero del array
+        cy.get('div[class="custom-control custom-checkbox custom-control-inline"]:has(label:contains("'+hobbies[0]+'")) input')
+            .check({force:true})
+            .should("be.checked")
     })
     
 })
