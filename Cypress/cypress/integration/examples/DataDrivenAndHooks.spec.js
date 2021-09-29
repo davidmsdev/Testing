@@ -35,6 +35,8 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
         let hobbies = this.data.hobbies
         let image = this.data.image
         let address = this.data.address
+        let state = this.data.state
+        let city = this.data.city
 
         cy.get('#firstName')
             .type(name)
@@ -115,6 +117,24 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
         // Añadir dirección
         cy.get('#currentAddress')
             .type(address)
+
+        // Seleccionar estado
+        cy.get('#state')
+            .click()
+            .find('div:contains("' + state + '")[id*="react-select"]')
+            .should('be.visible')
+            .click()
+
+        // Seleccionar ciudad
+        cy.get('#city')
+            .click()
+            .find('div:contains("' + city + '")[id*="react-select"]')
+            .should('be.visible')
+            .click()
+
+        // Submiteamos el form
+        cy.get('#submit')
+            .click()
     })
     
 })
