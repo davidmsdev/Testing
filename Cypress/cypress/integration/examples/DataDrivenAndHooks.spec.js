@@ -6,9 +6,12 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
     // Hook para cargar solo una vez los datos del archivo data.json
     before(() => {
         cy.fixture('data').then(function(data) {
+
             // Para tener los datos en ámbito global
-            this.data = data
-            
+            this.data = data 
+
+            // Cargamos la imagen
+            cy.fixture(this.data.image).as('image')
         })
     })
     
@@ -30,6 +33,7 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
         let day = this.data.birth.day
         let subject = this.data.subject
         let hobbies = this.data.hobbies
+        let image = this.data.image
 
         cy.get('#firstName')
             .type(name)
@@ -87,6 +91,25 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
         cy.get('div[class="custom-control custom-checkbox custom-control-inline"]:has(label:contains("'+hobbies[0]+'")) input')
             .check({force:true})
             .should("be.checked")
+
+        // Subir la imagen
+        cy.get('#uploadPicture').then( function ($el) {
+            // Convertir image de base64 a blob
+            const blob = Cypress.Blob.base64StringToBlob(this.image, 'image/png')
+
+            // Aquí seleccionamos la imagen
+            const file = new File([blob], image , { type: 'image/png' })
+            const list = new DataTransfer()
+
+            // Agregar a la lista nuestros archivos
+            list.items.add(file)
+
+            // Nuestra lsita de archivos
+            const myFileList = list.files
+
+            $el[0].files = myFileList
+            $el[0].dispatchEvent(new Event('change', { bubbles: true }))
+        })
     })
     
 })
