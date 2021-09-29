@@ -34,6 +34,7 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
         let subject = this.data.subject
         let hobbies = this.data.hobbies
         let image = this.data.image
+        let address = this.data.address
 
         cy.get('#firstName')
             .type(name)
@@ -110,6 +111,10 @@ describe('Trabajando con Data Drive Testing y Hooks', () => {
             $el[0].files = myFileList
             $el[0].dispatchEvent(new Event('change', { bubbles: true }))
         })
+
+        // Añadir dirección
+        cy.get('#currentAddress')
+            .type(address)
     })
     
 })
