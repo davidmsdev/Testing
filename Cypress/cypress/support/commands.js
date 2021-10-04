@@ -40,6 +40,10 @@ Cypress.Commands.add('addProduct', (productName) => {
                     // Buscamos el botón para añadir del elemento en el que estamos
                     cy.get('@productsContainer').eq(index).find('button[onclick^="cart.add"]')
                         .click()
+
+                    // Verificamos que se ha añadido al carrito correctamente a partir del mensaje de alerta
+                    cy.get('.alert.alert-success.alert-dismissible')
+                        .should('contain.text', productName)
                 }
             })
         })
