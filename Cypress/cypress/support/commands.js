@@ -23,3 +23,24 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('addProduct', (productName) => {
+
+    cy.get('div[class="product-thumb"]').as('productsContainer')
+    cy.get('@productsContainer')
+        .each( ($el, index) => {
+
+            // Para cada elemento buscamos el nombre que queremos
+            cy.get(':has(.caption) h4 a').eq(index).then( $product => {
+                let product = $product.text()
+                
+                if (product.includes(productName)) {
+                    cy.log('Se ha encontrado el elemento HTC Touch HD')
+
+                    // Buscamos el botón para añadir del elemento en el que estamos
+                    cy.get('@productsContainer').eq(index).find('button[onclick^="cart.add"]')
+                        .click()
+                }
+            })
+        })
+})
