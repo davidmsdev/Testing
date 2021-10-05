@@ -26,6 +26,8 @@
 
 Cypress.Commands.add('addProduct', (productName) => {
 
+    cy.log('AGREGAR PRODUCTOS EN EL CARRITO')
+
     cy.get('div[class="product-thumb"]').as('productsContainer')
     cy.get('@productsContainer')
         .each( ($el, index) => {
@@ -35,8 +37,7 @@ Cypress.Commands.add('addProduct', (productName) => {
                 let product = $product.text()
                 
                 if (product.includes(productName)) {
-                    cy.log('Se ha encontrado el elemento HTC Touch HD')
-
+                
                     // Buscamos el botón para añadir del elemento en el que estamos
                     cy.get('@productsContainer').eq(index).find('button[onclick^="cart.add"]')
                         .click()
@@ -46,5 +47,25 @@ Cypress.Commands.add('addProduct', (productName) => {
                         .should('contain.text', productName)
                 }
             })
+        })
+})
+
+Cypress.Commands.add('verifyProductInCart', (productName) => {
+
+    cy.log('VERIFICAR PRODUCTOS EN EL CARRITO')
+    cy.log('Producto recibido' + productName)
+
+    // Almacenamos la fila de los productos a partir del botón de eliminar
+    cy.get('tr:has(button[onclick*="cart.remove"])').as('cartRow')
+    cy.get('tr:has(button[onclick*="cart.remove"]) td[class="text-left"] a')
+        .each(($el, index, $list) => {
+            cy.get('td[class="text-left"] a')
+                .eq(index)
+                .then(($product) => {
+                    let product = $product.text()
+                    cy.log('Nombre del producto:' + product)
+                    cy.get('@cartRow')
+                        .should('contain.text', productName)
+                })
         })
 })
