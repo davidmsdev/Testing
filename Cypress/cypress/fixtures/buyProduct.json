@@ -1,0 +1,10 @@
+{
+    "product" : {
+        "name" : "Blouse",
+        "price" : "27.00"
+    },
+    "user" : {
+        "email" : "correo7@correo.com",
+        "pass" : "12345"
+    }
+}
