@@ -27,6 +27,7 @@ describe('Pruebas más avanzadas', () => {
         products.forEach( (product) => {
             cy.log('Agregando ' + product + ' al carrito...')
             cy.addProduct(product)
+            cy.pause()
         })   
         
         cy.get('.btn-inverse')
