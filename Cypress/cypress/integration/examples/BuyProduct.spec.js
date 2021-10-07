@@ -1,21 +1,49 @@
 /// <reference types="cypress" />
 
+import AddressPage from '../../support/pagesObjects/automationPractice/AddressPage'
+import AuthenticationPage from '../../support/pagesObjects/automationPractice/AuthenticationPage'
+import HomePage from '../../support/pagesObjects/automationPractice/HomePage'
+import PaymentPage from '../../support/pagesObjects/automationPractice/PaymentPage'
+import ShippingPage from '../../support/pagesObjects/automationPractice/ShippingPage'
+import ShoppingCartSummaryPage from '../../support/pagesObjects/automationPractice/ShoppingCartSummaryPage'
+
 describe('Comprando un producto', () => {
+
+    // Instanciamos las clases de pageObjects
+    const addressPage = new AddressPage()
+    const authenticationPage = new AuthenticationPage()
+    const homePage = new HomePage()
+    const paymentPage = new PaymentPage()
+    const shippingPage = new ShippingPage()
+    const shoppingCartSummaryPage = new ShoppingCartSummaryPage()
+
+    before(() => {
+        cy.fixture('buyProduct').then(function(data) {
+
+            // Para tener los datos en ámbito global
+            this.data = data 
+        })
+    })
     
     beforeEach(() => {
         cy.visit('http://automationpractice.com/index.php');
     })
 
-    it('Realizar todos los pasos para poder comprar un producto', () => {
+    it('Realizar todos los pasos para poder comprar un producto', function() {
+
+        let productName = this.data.product.name
+        let productPrice = this.data.product.price
+        let userEmail = this.data.user.email
+        let userPass = this.data.user.pass
 
         // Buscamos un producto en concreto
-        cy.get('#search_query_top')
-            .type('Blouse')
-        cy.get('#searchbox > .btn')
+        homePage.getSearchBoxInput()
+            .type(productName)
+        homePage.getSearchBoxButton()
             .click()
 
-        // Comprobamos que este producto aparece en la búsqeda y tiene el botón add to cart
-        cy.get('.product-container:has(.product-name[title="Blouse"]) .ajax_add_to_cart_button')
+        // Añadimos el prodcuto al carrito
+        homePage.getAddToCartElementButton(productName)
             .click()
 
         // Comprobamos que se nos ha abierto el popup, ponemos un timeout dado que la página carga muy lenta
@@ -24,48 +52,50 @@ describe('Comprando un producto', () => {
             .should('be.visible')
 
         // Continuamos al checkout clicando el botón en el popup que se nos abre
-        cy.get('.button-medium[title="Proceed to checkout"]')
+        homePage.getPreceedToCheckoutButton()
             .click()
 
         // Verificamos que el producto se ha añadido correctamente al carrito y que tiene el precio esperado
-        // Apartado 01. Summary
-        cy.get('tr[id^=product]')
-            .find('.product-name > a')
-            .should('contain.text', 'Blouse')
+        shoppingCartSummaryPage.getProductNameText()
+            .should('contain.text', productName)
 
-        cy.get('tr[id^=product]')
-            .find('.cart_unit > .price')
-            .should('contain.text', '27.00')
+        shoppingCartSummaryPage.getProdcutPriceText()
+            .should('contain.text', productPrice)
 
         // Una vez esta todo ok damos click
-        cy.get('.cart_navigation > .button')
+        shoppingCartSummaryPage.getPreceedToCheckoutButton()
             .click() 
             
         // Apartado 02. Sign In
-        cy.get('#email').type('correo7@correo.com')
-        cy.get('#passwd').type('12345')
-        cy.get('#SubmitLogin').click()
+        authenticationPage.getEmailAdressInput()
+            .type(userEmail)
+
+        authenticationPage.getPasswordInput()
+            .type(userPass)
+
+        authenticationPage.getSubmitButton().click()
 
         // Apartado 03. Address
-        cy.get('.cart_navigation > .button')
+        addressPage.getPreceedToCheckoutButton()
             .click() 
 
         // Apartado 04. Shipping
-        cy.get('#cgv')
+        shippingPage.getTermsOfServiceCheckbox()
             .check()
             .should('be.checked')
 
-        cy.get('.cart_navigation > .button')
+        shippingPage.getPreceedToCheckoutButton()
             .click() 
 
         // Apartado 05. Payment
-        cy.get('.bankwire')
+        paymentPage.getPayBankWireOptionButton()
             .click()
 
-        cy.get('.cart_navigation > .button')
+        paymentPage.getConfirmMyOrderButton()
             .click() 
 
         // Verificamos que se ha ejectuado la orden
-        cy.get('.cheque-indent > .dark').should('contain.text', 'Your order on My Store is complete.')
+        paymentPage.getDescritpionTitleText()
+            .should('contain.text', 'Your order on My Store is complete.')
     })
 })
