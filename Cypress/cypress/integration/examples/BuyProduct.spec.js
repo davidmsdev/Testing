@@ -29,6 +29,8 @@ describe('Comprando un producto', () => {
         cy.visit('http://automationpractice.com/index.php');
     })
 
+    Cypress.config('defaultCommandTimeout', 15000)
+    
     it('Realizar todos los pasos para poder comprar un producto', function() {
 
         let productName = this.data.product.name
