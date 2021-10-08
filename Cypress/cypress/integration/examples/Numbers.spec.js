@@ -12,7 +12,7 @@ describe('Pruebas con números', () => {
 
     beforeEach( () => {
         // Accedemos a la página de compras
-        cy.visit('https://demo.opencart.com/index.php')
+        cy.visit(Cypress.env('url') + '/index.php')
     })
 
     it('Verificación de la suma de los productos del drop down de carrito de compras', function() {
