@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: alten_001.AltenTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 30.525 s <<< FAILURE! - in alten_001.AltenTest
+dynamicContent  Time elapsed: 2.451 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at alten_001.AltenTest.dynamicContent(AltenTest.java:147)
+
