@@ -1,12 +1,15 @@
 # The Internet Herokuapp Test Exercice
 
 Objective: Learn to work with Selenium with different objects and different types of operations.
+
 Statement: Create in a maven project the different tests taking as a base page: http://the-internet.herokuapp.com/
 
 ## Conditioning factors:
 
-Each page must be a page object
-Use "Extent Report" as a reporting mechanism. Visit https://github.com/extent-framework/extentreports-testng-adapter
+Each page must be a page object.
+
+Use "Extent Report" as a reporting mechanism. Visit https://github.com/extent-framework/extentreports-testng-adapter.
+
 All test cases (@Test) must be contained in the same class ("runner").
 
 ## To run all test
