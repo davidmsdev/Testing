@@ -1,7 +1,13 @@
 package pages;
 
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -13,8 +19,10 @@ public class BasePage {
 
     // Static initializer block
     static {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--disable-notifications");
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(chromeOptions);
         wait = new WebDriverWait(driver, 10);
     }
 
@@ -24,8 +32,23 @@ public class BasePage {
         wait = new WebDriverWait(driver, 10);
     }
 
+    // Methods
     public static void navigateTo(String url) {
         driver.get(url);
+        driver.manage().window().maximize();
     }
-    
+
+    public WebElement find(String locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+    }
+
+    public void clickElement(String locator) {
+        find(locator).click();
+    }
+
+    public void write(String locator, String text) {
+        find(locator).clear();
+        find(locator).sendKeys(text);
+    }
+
 }
