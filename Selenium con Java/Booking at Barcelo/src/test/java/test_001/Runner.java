@@ -53,28 +53,21 @@ public class Runner {
 
         String browser = "Chrome";
         String name = "Barceló Sants";
-        // long oneDayInSeconds = 86400;
-        // long oneDayInMiliseconds = oneDayInSeconds * 1000;
-        // long add5days = oneDayInMiliseconds * 5;
-        // We obtain the date of the current day at 10:00:00 in milliseconds
         ZonedDateTime currentDate = ZonedDateTime.of(LocalDate.now(), LocalTime.of(12, 00, 00), ZoneId.of("Europe/Madrid"));
         long checkin = (currentDate.plus(5, ChronoUnit.DAYS).toEpochSecond())*1000;
         long checkout = (currentDate.plus(9, ChronoUnit.DAYS).toEpochSecond())*1000;
+        String adults = "2";
+        String childrens = "1";
 
         return new Object[][] {
-            {browser, name, checkin, checkout}, 
+            {browser, name, checkin, checkout, adults, childrens}, 
         };
     }
     
     @Test (testName = "Booking Barceló", dataProvider = "data-provider")
-    public void parameterTest(String browserName, String hotelName, long checkin, long checkout) throws InterruptedException {
+    public void parameterTest(String browserName, String hotelName, long checkin, long checkout, String adults, String childrens) throws InterruptedException {
 
         ExtentTest test = extent.createTest("Booking in Barceló");
-
-        System.out.println(browserName);
-        System.out.println(hotelName);
-        System.out.println(checkin);
-        //System.out.println(checkout);
 
         // If it is not the correct browser, the test will stop
         try {
@@ -85,7 +78,6 @@ public class Runner {
             throw e;
         }
         
-
         // Load properties
         utilities.getProperties();
 
@@ -118,6 +110,11 @@ public class Runner {
         }
         
         homePage.clickInCheckoutDate(checkout);
+
+        homePage.clickToSelectGuest();
+        homePage.enterTheNumberOfAdults(adults);
+        homePage.enterTheNumberOfChildrens(childrens);
+        homePage.clickBookingButton();
         
     }
 }
