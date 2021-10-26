@@ -11,7 +11,7 @@ public class HomePage extends BasePage {
     String selectGuestButton = "rooms-fb";
     String adultsInputText = "//input[contains(@name,'adults')]";
     String cildrensInputText = "//input[@name='childs']";
-    String bookingButtonXpath = "//button[@id='fastbooking_cta_booking_home']";
+    String bookingButtonId = "fastbooking_cta_booking_home";
 
     // Variables
     String hotelName = "";
@@ -67,6 +67,6 @@ public class HomePage extends BasePage {
     }
 
     public void clickBookingButton() {
-        clickElement(bookingButtonXpath);
+        findById(bookingButtonId).click();
     }
 }
