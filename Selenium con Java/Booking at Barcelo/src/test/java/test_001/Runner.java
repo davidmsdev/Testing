@@ -27,6 +27,7 @@ public class Runner {
     // Instances
     Utilities utilities = new Utilities();
     HomePage homePage = new HomePage();
+    BarceloPage barceloPage = new BarceloPage();
 
     // Variables
     WebDriver driver = null;
@@ -115,6 +116,9 @@ public class Runner {
         homePage.enterTheNumberOfAdults(adults);
         homePage.enterTheNumberOfChildrens(childrens);
         homePage.clickBookingButton();
+
+        barceloPage.clickBookingButton();
+        barceloPage.changeWindow();
         
     }
 }
