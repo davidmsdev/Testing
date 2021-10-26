@@ -15,6 +15,7 @@ public class BasePage {
 
     protected static WebDriver driver;
     protected static WebDriverWait wait;
+    protected static String originalWindow = "";
 
     // Static initializer block
     static {
@@ -53,5 +54,21 @@ public class BasePage {
         find(locator).sendKeys(Keys.CONTROL + "a");
         find(locator).sendKeys(Keys.DELETE);
         find(locator).sendKeys(text);
+    }
+
+    public void goToNewWindow() {
+        // Save the actual window
+        originalWindow = driver.getWindowHandle();
+
+        // We wait until the following window opens
+		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+
+        // We go through the two windows and if we are in the one that is not original it is the new window
+        for (String windowhandle : driver.getWindowHandles()) {
+			if(!originalWindow.contentEquals(windowhandle)) {
+				driver.switchTo().window(windowhandle);
+				break;
+			}
+		}
     }
 }
