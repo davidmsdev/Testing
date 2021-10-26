@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -40,12 +41,17 @@ public class BasePage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
     }
 
+    public WebElement findById(String locator) {
+        return driver.findElement(By.id(locator));
+    }
+
     public void clickElement(String locator) {
         find(locator).click();
     }
 
     public void write(String locator, String text) {
-        find(locator).clear();
+        find(locator).sendKeys(Keys.CONTROL + "a");
+        find(locator).sendKeys(Keys.DELETE);
         find(locator).sendKeys(text);
     }
 }
