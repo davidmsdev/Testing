@@ -1,8 +1,6 @@
 package pages;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -50,5 +48,4 @@ public class BasePage {
         find(locator).clear();
         find(locator).sendKeys(text);
     }
-
 }
