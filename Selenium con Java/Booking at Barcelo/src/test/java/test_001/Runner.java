@@ -12,9 +12,12 @@ import pages.*;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.beust.jcommander.Parameter;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -37,8 +40,9 @@ public class Runner {
 	static ExtentSparkReporter spark = new ExtentSparkReporter("index.html");
 
     String url = "";
-    String author = "David Morales";
-    String correctBrowser = "Chrome";
+    String author = "";
+    String browserTest = "";
+    String correctBrowser = "";
 
     @BeforeSuite
     static void setupClass() {
@@ -69,7 +73,14 @@ public class Runner {
     @Test (testName = "Booking Barceló", dataProvider = "data-provider")
     public void parameterTest(String browserName, String hotelName, long checkin, long checkout, String adults, String childrens) throws InterruptedException {
 
-        ExtentTest test = extent.createTest("Booking in Barceló");
+        // Load properties
+        utilities.getProperties();
+
+        url = utilities.getURL();
+        author = utilities.getAuthor();
+        browserTest = utilities.getBrowser();
+
+        ExtentTest test = extent.createTest("Booking in Barceló").assignAuthor(author).assignDevice(browserTest);
 
         // If it is not the correct browser, the test will stop
         try {
@@ -80,12 +91,13 @@ public class Runner {
             throw e;
         }
         
-        // Load properties
-        utilities.getProperties();
-
-        url = utilities.getURL();
-
-        homePage.navigateToBarceloPage(url);
+        try {
+            homePage.navigateToBarceloPage(url);
+            test.pass("Navigate to " + url);
+        } catch (InvalidArgumentException e) {
+            test.fail("The url could not be accessed");
+        }
+        
 
         try {
             homePage.clickCookies();
@@ -94,8 +106,15 @@ public class Runner {
             test.fail("Accept button Cookies couldn't found");
         }
         
-        homePage.enterHotelName(hotelName);
-        homePage.clickHotelNameInDropDownResults();
+        try {
+            homePage.enterHotelName(hotelName);
+            homePage.clickHotelNameInDropDownResults();
+            test.pass("Entered the hotel name: " + hotelName + " and selected in dropdown results");
+        } catch (NoSuchElementException e) {
+            test.fail("Data could not be entered, input or dropdown could not be found");
+        }
+        
+        
 
         // The name of the input has to be the same as the name we write
         try {
@@ -116,28 +135,49 @@ public class Runner {
         homePage.clickToSelectGuest();
         homePage.enterTheNumberOfAdults(adults);
         homePage.enterTheNumberOfChildrens(childrens);
-        homePage.clickBookingButton();
+
+        try {
+            homePage.clickBookingButton();
+            test.pass("Clicked booking button");
+        } catch (ElementClickInterceptedException e) {
+            test.fail("Couldn't click on the booking button");
+        }
+        
 
         // Verify if we are in the intermediate page barceló hotel
-        try {
-            Assert.assertTrue(barceloPage.getTitle().contains(hotelName));
-            test.pass("We are in Barcelo Sants Hotel page");
-        } catch (AssertionError e){
-            test.fail("Barcelo Sants Hotel page not found");
-        }
+        // try {
+        //     test.info(barceloPage.getTitle());
+        //     Assert.assertTrue(barceloPage.getTitle().contains(hotelName));
+        //     test.pass("We are in Barcelo Sants Hotel page");
+        // } catch (AssertionError e){
+        //     test.fail("Barcelo Sants Hotel page not found");
+        // }
         
         barceloPage.clickBookingButton();
         barceloPage.changeWindow();
         
-
-        reservationPage.closePopup();
+        try {
+            reservationPage.closePopup();
+            test.pass("Popup closed");
+        } catch (NoSuchElementException e) {
+            test.fail("Popup couldn't found");
+        }
+        
         
         test.info("Adults expected: " + adults);
         try {
             Assert.assertTrue(reservationPage.getAdultsGuestText().contains(adults));
             test.pass("Adults results: " + reservationPage.getAdultsGuestText());
         } catch (AssertionError e) {
-            test.pass("The expected result and the obtained result are not the same");
+            test.fail("The expected result and the obtained result are not the same");
+        }
+
+        test.info("Childrens expected: " + childrens);
+        try {
+            Assert.assertTrue(reservationPage.getChildrensGuestText().contains(childrens));
+            test.pass("Childrens results: " + reservationPage.getChildrensGuestText());
+        } catch (AssertionError e) {
+            test.fail("The expected result and the obtained result are not the same");
         }
     }
 }
