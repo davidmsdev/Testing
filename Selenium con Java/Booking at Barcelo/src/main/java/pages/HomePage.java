@@ -45,12 +45,12 @@ public class HomePage extends BasePage {
     }
 
     public void clickInCheckinDate(long checkin) {
-        checkinXpath = "//td[@time=" + checkin + "]";
+        checkinXpath = "//td[@time=" + checkin + " and contains(@class,'datepicker__month-day--visibleMonth')]";
         clickElement(checkinXpath);
     }
 
     public void clickInCheckoutDate(long checkout) {
-        checkoutXpath = "//*[@id='month-2-1']/tbody/tr[1]/td[@time=" + checkout +"]";
+        checkoutXpath = "//td[@time=" + checkout + " and contains(@class,'datepicker__month-day--visibleMonth')]";
         clickElement(checkoutXpath);
     }
 
