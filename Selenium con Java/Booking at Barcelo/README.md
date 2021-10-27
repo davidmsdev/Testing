@@ -16,3 +16,17 @@ Objective: Create a test case on a real website and with the real conditions of 
  * Select a dates of stay (it must be after the execution date in the form "Arrival Date 5 days after the Current date and Departure Date 4 days after the arrival date 
  * Select 1 adult and 2 children Click on Book 
  * Verify that the reserved hotel page appears
+
+## Some problems solved
+
+'''
+stale element reference: element is not attached to the page document
+'''
+
+I had the problem that the previous expeción showed me, and the only way I found was that you had to put it in a try catch, catch the error and
+
+look for the element again in the catch.
+
+'''
+https://stackoverflow.com/questions/18225997/stale-element-reference-element-is-not-attached-to-the-page-document
+'''
