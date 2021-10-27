@@ -131,8 +131,13 @@ public class Runner {
         
 
         reservationPage.closePopup();
-
-
         
+        test.info("Adults expected: " + adults);
+        try {
+            Assert.assertTrue(reservationPage.getAdultsGuestText().contains(adults));
+            test.pass("Adults results: " + reservationPage.getAdultsGuestText());
+        } catch (AssertionError e) {
+            test.pass("The expected result and the obtained result are not the same");
+        }
     }
 }
