@@ -1,5 +1,7 @@
 package pages;
 
+import java.time.ZonedDateTime;
+
 import org.openqa.selenium.WebElement;
 
 public class HomePage extends BasePage {
@@ -26,6 +28,14 @@ public class HomePage extends BasePage {
 
     public void navigateToBarceloPage(String url) {
         navigateTo(url);
+    }
+
+    public long convertCheckinInEpoch(ZonedDateTime date) {
+        return convertToEpoch(date);
+    }
+
+    public long convertCheckoutInEpoch(ZonedDateTime date) {
+        return convertToEpoch(date);
     }
 
     public void clickCookies() {

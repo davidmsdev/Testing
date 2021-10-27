@@ -1,5 +1,7 @@
 package pages;
 
+import java.time.ZonedDateTime;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -82,5 +84,9 @@ public class BasePage {
 
     public boolean waitInvisibiltyOfElement(String locator) {
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(locator)));
+    }
+
+    public long convertToEpoch(ZonedDateTime date) {
+        return date.toEpochSecond()*1000;
     }
 }
