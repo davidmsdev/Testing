@@ -56,6 +56,14 @@ public class BasePage {
         find(locator).sendKeys(text);
     }
 
+    public String getText(String locator) {
+        return find(locator).getText();
+    }
+
+    public String getTitle() {
+        return driver.getTitle();
+    }
+
     public void goToNewWindow() {
         // Save the actual window
         originalWindow = driver.getWindowHandle();
@@ -70,5 +78,9 @@ public class BasePage {
 				break;
 			}
 		}
+    }
+
+    public boolean waitInvisibiltyOfElement(String locator) {
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(locator)));
     }
 }
