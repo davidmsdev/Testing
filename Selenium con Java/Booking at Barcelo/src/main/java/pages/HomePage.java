@@ -12,6 +12,7 @@ public class HomePage extends BasePage {
     String adultsInputText = "//input[contains(@name,'adults')]";
     String cildrensInputText = "//input[@name='childs']";
     String bookingButtonId = "fastbooking_cta_booking_home";
+    String divInterceptedClick = "//div[contains(@class, 'c-loading') and contains(@class,'bhg-loading')";
 
     // Variables
     String hotelName = "";
@@ -50,6 +51,8 @@ public class HomePage extends BasePage {
     }
 
     public void clickInCheckoutDate(long checkout) {
+        // To skip the "Loading best prices"
+        waitInvisibiltyOfElement(divInterceptedClick);
         checkoutXpath = "//td[@time=" + checkout + " and contains(@class,'datepicker__month-day--visibleMonth')]";
         clickElement(checkoutXpath);
     }
