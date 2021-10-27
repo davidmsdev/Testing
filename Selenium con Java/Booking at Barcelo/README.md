@@ -19,14 +19,14 @@ Objective: Create a test case on a real website and with the real conditions of 
 
 ## Some problems solved
 
-'''
+´´´
 stale element reference: element is not attached to the page document
-'''
+´´´
 
 I had the problem that the previous expeción showed me, and the only way I found was that you had to put it in a try catch, catch the error and
 
 look for the element again in the catch.
 
-'''
+´´´
 https://stackoverflow.com/questions/18225997/stale-element-reference-element-is-not-attached-to-the-page-document
-'''
+´´´
