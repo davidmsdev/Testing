@@ -7,6 +7,8 @@ import java.util.Properties;
 public class Utilities {
     
     public static String URL;
+    public static String author;
+    public static String browser;
 
     public void getProperties() {
 
@@ -17,6 +19,8 @@ public class Utilities {
     
             // We assign the values from the datafiles.properties file
             URL = pop.getProperty("URL");
+            author = pop.getProperty("author");
+            browser = pop.getProperty("browser");
             
         } catch (IOException e) {
             e.printStackTrace();	
@@ -25,5 +29,13 @@ public class Utilities {
     
     public String getURL() {
         return URL;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getBrowser() {
+        return browser;
     }
 }
