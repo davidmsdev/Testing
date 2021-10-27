@@ -28,6 +28,7 @@ public class Runner {
     Utilities utilities = new Utilities();
     HomePage homePage = new HomePage();
     BarceloPage barceloPage = new BarceloPage();
+    ReservationPage reservationPage = new ReservationPage();
 
     // Variables
     WebDriver driver = null;
@@ -117,8 +118,21 @@ public class Runner {
         homePage.enterTheNumberOfChildrens(childrens);
         homePage.clickBookingButton();
 
+        // Verify if we are in the intermediate page barceló hotel
+        try {
+            Assert.assertTrue(barceloPage.getTitle().contains(hotelName));
+            test.pass("We are in Barcelo Sants Hotel page");
+        } catch (AssertionError e){
+            test.fail("Barcelo Sants Hotel page not found");
+        }
+        
         barceloPage.clickBookingButton();
         barceloPage.changeWindow();
+        
+
+        reservationPage.closePopup();
+
+
         
     }
 }
