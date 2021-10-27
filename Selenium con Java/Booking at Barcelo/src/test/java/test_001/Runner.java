@@ -23,6 +23,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class Runner {
@@ -42,7 +43,7 @@ public class Runner {
     String url = "";
     String author = "";
     String browserTest = "";
-    String correctBrowser = "";
+    String correctBrowser = "Chrome";
 
     @BeforeSuite
     static void setupClass() {
@@ -60,8 +61,10 @@ public class Runner {
         String browser = "Chrome";
         String name = "Barceló Sants";
         ZonedDateTime currentDate = ZonedDateTime.of(LocalDate.now(), LocalTime.of(12, 00, 00), ZoneId.of("Europe/Madrid"));
-        long checkin = (currentDate.plus(5, ChronoUnit.DAYS).toEpochSecond())*1000;
-        long checkout = (currentDate.plus(9, ChronoUnit.DAYS).toEpochSecond())*1000;
+        // long checkin = (currentDate.plus(5, ChronoUnit.DAYS).toEpochSecond())*1000;
+        // long checkout = (currentDate.plus(9, ChronoUnit.DAYS).toEpochSecond())*1000;
+        ZonedDateTime checkin = currentDate.plus(5, ChronoUnit.DAYS);
+        ZonedDateTime checkout = currentDate.plus(9, ChronoUnit.DAYS);
         String adults = "2";
         String childrens = "1";
 
@@ -71,7 +74,7 @@ public class Runner {
     }
     
     @Test (testName = "Booking Barceló", dataProvider = "data-provider")
-    public void parameterTest(String browserName, String hotelName, long checkin, long checkout, String adults, String childrens) throws InterruptedException {
+    public void parameterTest(String browserName, String hotelName, ZonedDateTime checkin, ZonedDateTime checkout, String adults, String childrens) throws InterruptedException {
 
         // Load properties
         utilities.getProperties();
@@ -79,6 +82,16 @@ public class Runner {
         url = utilities.getURL();
         author = utilities.getAuthor();
         browserTest = utilities.getBrowser();
+
+        System.out.println(checkin);
+        System.out.println(checkout);
+
+
+        long checkinEpoch = homePage.convertCheckinInEpoch(checkin);
+        long checkoutEpoch = homePage.convertCheckoutInEpoch(checkout);
+
+        System.out.println(checkinEpoch);
+        System.out.println(checkoutEpoch);
 
         ExtentTest test = extent.createTest("Booking in Barceló").assignAuthor(author).assignDevice(browserTest);
 
@@ -125,12 +138,12 @@ public class Runner {
         }
 
         try {
-            homePage.clickInCheckinDate(checkin);
+            homePage.clickInCheckinDate(checkinEpoch);
         } catch (org.openqa.selenium.StaleElementReferenceException ex) {
-            homePage.clickInCheckinDate(checkin);
+            homePage.clickInCheckinDate(checkinEpoch);
         }
         
-        homePage.clickInCheckoutDate(checkout);
+        homePage.clickInCheckoutDate(checkoutEpoch);
 
         homePage.clickToSelectGuest();
         homePage.enterTheNumberOfAdults(adults);
@@ -155,6 +168,12 @@ public class Runner {
         
         barceloPage.clickBookingButton();
         barceloPage.changeWindow();
+
+        try {
+
+        } catch (AssertionError e) {
+            
+        }
         
         try {
             reservationPage.closePopup();
