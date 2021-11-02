@@ -10,7 +10,8 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
     features = "src/test/resources/features",
     glue = "steps",
-    publish = true
+    publish = true,
+    tags = "@Test"
 )
 
 public class Runner {
