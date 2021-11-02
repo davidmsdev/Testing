@@ -203,3 +203,4 @@ training.iml
 .project
 /.settings/
 .classpath
+.factorypath
