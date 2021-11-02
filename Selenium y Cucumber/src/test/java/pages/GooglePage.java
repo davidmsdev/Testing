@@ -4,7 +4,8 @@ public class GooglePage extends BasePage {
 
     private String url = "https://www.google.com/";
     private String acceptCookies = "//*[@id='L2AGLb']";
-    private String searchButton = "//body/div[1]/div[3]/form[1]/div[1]/div[1]/div[3]/center[1]/input[1]";
+    private String searchButton = "//div[@class='lJ9FBc']//input[@name='btnK']";
+    private String searchTextField = "//input[@title='Buscar']";
     
     public GooglePage() {
         super(driver);
@@ -20,5 +21,9 @@ public class GooglePage extends BasePage {
 
     public void clickGoogleSearch() {
         clickElement(searchButton);
+    }
+
+    public void enterSearchCriteria(String criteria) {
+        write(searchTextField, criteria);
     }
 }

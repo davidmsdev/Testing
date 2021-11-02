@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -45,5 +46,9 @@ public class BasePage {
         Find(locator).click();
     }
 
-
+    public void write(String locator, String textToWrite) {
+        Find(locator).sendKeys(Keys.CONTROL + "a");
+        Find(locator).sendKeys(Keys.DELETE);
+        Find(locator).sendKeys(textToWrite);   
+    }
 }
