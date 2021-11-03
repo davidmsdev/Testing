@@ -26,4 +26,8 @@ public class GooglePage extends BasePage {
     public void enterSearchCriteria(String criteria) {
         write(searchTextField, criteria);
     }
+
+    public String firstResult(String locator) {
+        return textFromElement(locator);
+    }
 }
