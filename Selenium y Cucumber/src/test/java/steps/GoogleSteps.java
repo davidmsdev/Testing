@@ -1,6 +1,6 @@
 package steps;
 
-import io.cucumber.java.en.*;
+import cucumber.api.java.en.*;
 import pages.GooglePage;
 
 public class GoogleSteps {
@@ -25,6 +25,6 @@ public class GoogleSteps {
 
     @Then("^the results match the criteria$")
     public void validateResults() {
-
+        
     }
 }
