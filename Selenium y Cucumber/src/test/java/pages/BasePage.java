@@ -110,4 +110,8 @@ public class BasePage {
     public String textFromElement(String locator) {
         return Find(locator).getText();
     }
+
+    public boolean elementIsDisplayed(String locator) {
+        return Find(locator).isDisplayed();
+    }
 }
