@@ -114,4 +114,12 @@ public class BasePage {
     public boolean elementIsDisplayed(String locator) {
         return Find(locator).isDisplayed();
     }
+
+    public boolean elementIsEnabled(String locator) {
+        return Find(locator).isEnabled();
+    }
+
+    public boolean elementIsSelected(String locator) {
+        return Find(locator).isSelected();
+    }
 }
