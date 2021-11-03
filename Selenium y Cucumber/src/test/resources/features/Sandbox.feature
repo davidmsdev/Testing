@@ -7,4 +7,4 @@ Scenario: As a Test Engineer, I try out different actions on a sandvox page.
 @Test
 Scenario: As a Test Engineer, I try to retrieve the value of an static table.
     Given I navigate to the static table
-    And I can return the value I wanted
+    Then I can return the value I wanted
