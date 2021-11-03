@@ -94,4 +94,20 @@ public class BasePage {
 
         Find(cellToFill).sendKeys(stringToSend);
     }
+
+    public void switchToiFrame(int iFrameIndex) {
+        driver.switchTo().frame(iFrameIndex);
+    }
+
+    public void switchToParentFrame() {
+        driver.switchTo().parentFrame();
+    }
+
+    public void dismissAlert() {
+        driver.switchTo().alert().dismiss();
+    }
+
+    public String textFromElement(String locator) {
+        return Find(locator).getText();
+    }
 }
