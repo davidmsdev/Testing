@@ -25,10 +25,10 @@ public class ListPage extends BasePage {
         navigateTo(url);
     }
 
-    public void enterSearchCriteria() throws InterruptedException {
+    public void enterSearchCriteria(String state) throws InterruptedException {
         
         Thread.sleep(600);
-        write(searchField, "Washington");
+        write(searchField, state);
         
     }
 

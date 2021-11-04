@@ -7,7 +7,7 @@ public class GridPage extends BasePage {
     private String mainTable = "//*[@id='root']/div/table";
     
     public GridPage() {
-        super(driver);
+        super(driver); 
     }
 
     public void navigateToGrid() {

@@ -17,7 +17,7 @@ import pages.BasePage;
 
 public class Runner {
 
-    @AfterClass
+    @AfterClass 
     public static void cleanDriver() {
         BasePage.closeBrowser();
     }
