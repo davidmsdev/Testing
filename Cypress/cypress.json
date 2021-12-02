@@ -2,5 +2,6 @@
     "defaultCommandTimeout": 7000,
     "env": {
         "url": "https://demo.opencart.com"
-    } 
+    },
+    "testFiles": "**/*.feature"
 }

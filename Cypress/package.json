@@ -9,6 +9,10 @@
   "author": "David Morales",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^7.6.0"
+    "cypress": "^7.6.0",
+    "cypress-cucumber-preprocessor": "^4.3.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }
