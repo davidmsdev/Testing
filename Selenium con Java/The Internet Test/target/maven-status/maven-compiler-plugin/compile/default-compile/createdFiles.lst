@@ -1,0 +1,10 @@
+pages/DisappearingElementsPage.class
+pages/MultipleWindows.class
+pages/HomePage.class
+pages/HorizontalSliderPage.class
+pages/DynamicContentPage.class
+pages/DynamicControlsPage.class
+pages/CheckboxPage.class
+pages/JavascriptAlertsPage.class
+pages/ChallengingDOM.class
+pages/Utilities.class
