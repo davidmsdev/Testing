@@ -4,7 +4,8 @@
   "description": "Primero pasos con Cypress",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules\\.bin\\cypress run",
+    "testChrome": "npm run test -- --browser chrome"
   },
   "author": "David Morales",
   "license": "ISC",
@@ -13,6 +14,6 @@
     "cypress-cucumber-preprocessor": "^4.3.0"
   },
   "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
+    "step_definitions": "cypress/integration/examples/Cucumber/**/"
   }
 }

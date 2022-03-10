@@ -1,13 +1,20 @@
 import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
-import AddressPage from '../../support/PageObjects/AddressPage'
-import AuthenticationPage from '../../support/PageObjects/AuthenticationPage'
-import HomePage from '../../support/PageObjects/HomePage'
-import PaymentPage from '../../support/PageObjects/PaymentPage'
-import ShippingPage from '../../support/PageObjects/ShippingPage'
-import ShoppingSummaryCartPage from '../../support/PageObjects/ShoppingCartSummaryPage'
+// import AddressPage from '../../support/pageObjects/automationPractice/AddressPage'
+// import AuthenticationPage from '../../../support/pageObjects/automationPractice/AuthenticationPage'
+// import HomePage from '../../../support/pageObjects/automationPractice/HomePage'
+// import PaymentPage from '../../../support/pageObjects/automationPractice/PaymentPage'
+// import ShippingPage from '../../../support/pageObjects/automationPractice/ShippingPage'
+// import ShoppingSummaryCartPage from '../../../support/pageObjects/automationPractice/ShoppingCartSummaryPage'
+import HomePage from '../../../../support/pagesObjects/automationPractice/HomePage'
+import AddressPage from '../../../../support/pagesObjects/automationPractice/AddressPage'
+import AuthenticationPage from '../../../../support/pagesObjects/automationPractice/AuthenticationPage'
+import PaymentPage from '../../../../support/pagesObjects/automationPractice/PaymentPage'
+import ShippingPage from '../../../../support/pagesObjects/automationPractice/ShippingPage'
+import ShoppingCartSummaryPage from '../../../../support/pagesObjects/automationPractice/ShoppingCartSummaryPage'
+//import ShoppingSummaryCartPage from '../../../../support/pagesObjects/automationPractice/ShoppingSummaryCartPage'
  
 const homePage = new HomePage()
-const shoppingSummaryCartPage = new ShoppingSummaryCartPage()
+const shoppingSummaryCartPage = new ShoppingCartSummaryPage()
 const authenticationPage = new AuthenticationPage()
 const addressPage = new AddressPage()
 const shippingPage = new ShippingPage()
